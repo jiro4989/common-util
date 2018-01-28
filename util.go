@@ -30,9 +30,7 @@ func WriteConfigFile(filename string, b []byte) error {
 
 // 設定ファイルの保存先ディレクトリを作成する
 func MkConfigDir(appnm string) error {
-	home := GetEnvHome()
-	// 保存先ディレクトリ
-	dir := filepath.Join(home, appnm)
+	dir := filepath.Join(GetConfigDir(), appnm)
 	err := os.MkdirAll(dir, os.ModeDir)
 	return err
 }
