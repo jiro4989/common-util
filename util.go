@@ -7,6 +7,10 @@ import (
 	"runtime"
 )
 
+const (
+	CONFIG_DIR_NAME = ".config"
+)
+
 // 設定ファイルからデータを取得する。
 func ReadConfigFile(filename string) ([]byte, error) {
 	home := GetEnvHome()
@@ -40,6 +44,15 @@ func GetEnvHome() string {
 	if home == "" && runtime.GOOS == "windows" {
 		// WindowsでHOME環境変数が定義されていない場合
 		home = os.Getenv("APPDATA")
+	}
+	return home
+}
+
+// 設定ファイルの配置場所ディレクトリのパスを返す。
+func GetConfigDir() string {
+	home := GetEnvHome()
+	if !(runtime.GOOS == "windows") {
+		home = filepath.Join(home, CONFIG_DIR_NAME)
 	}
 	return home
 }
