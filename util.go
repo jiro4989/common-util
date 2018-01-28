@@ -43,7 +43,7 @@ func GetEnvHome() string {
 	home := os.Getenv("HOME")
 	if home == "" && runtime.GOOS == "windows" {
 		// WindowsでHOME環境変数が定義されていない場合
-		home = os.Getenv("APPDATA")
+		home = os.Getenv("USERPROFILE")
 	}
 	return home
 }
@@ -51,9 +51,7 @@ func GetEnvHome() string {
 // 設定ファイルの配置場所ディレクトリのパスを返す。
 func GetConfigDir() string {
 	home := GetEnvHome()
-	if !(runtime.GOOS == "windows") {
-		home = filepath.Join(home, CONFIG_DIR_NAME)
-	}
+	home = filepath.Join(home, CONFIG_DIR_NAME)
 	return home
 }
 
