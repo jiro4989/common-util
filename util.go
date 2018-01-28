@@ -1,10 +1,21 @@
 package util
 
 import (
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"runtime"
 )
+
+// .configまたはAPPDATA配下に引数のファイルを保存する
+// 拡張子に合わせたファイルを生成する。
+// 対応するファイル
+// - json
+func WriteConfigFile(filename string, b []byte) error {
+	home := GetEnvHome()
+	path := filepath.Join(home, filename)
+	return ioutil.WriteFile(path, b, os.ModePerm)
+}
 
 // 設定ファイルの保存先ディレクトリを作成する
 func MkConfigDir(appnm string) error {
@@ -24,4 +35,10 @@ func GetEnvHome() string {
 		home = os.Getenv("APPDATA")
 	}
 	return home
+}
+
+// パスのファイルの有無を確認する
+func Exists(name string) bool {
+	_, err := os.Stat(name)
+	return !os.IsNotExist(err)
 }
