@@ -7,6 +7,13 @@ import (
 	"runtime"
 )
 
+// 設定ファイルからデータを取得する。
+func ReadConfigFile(filename string) ([]byte, error) {
+	home := GetEnvHome()
+	path := filepath.Join(home, filename)
+	return ioutil.ReadFile(path)
+}
+
 // .configまたはAPPDATA配下に引数のファイルを保存する
 // 拡張子に合わせたファイルを生成する。
 // 対応するファイル
