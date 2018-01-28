@@ -12,9 +12,9 @@ const (
 )
 
 // 設定ファイルからデータを取得する。
-func ReadConfigFile(filename string) ([]byte, error) {
-	home := GetEnvHome()
-	path := filepath.Join(home, filename)
+func ReadConfigFile(appname, filename string) ([]byte, error) {
+	dir := GetConfigDir()
+	path := filepath.Join(dir, appname, filename)
 	return ioutil.ReadFile(path)
 }
 
@@ -22,15 +22,15 @@ func ReadConfigFile(filename string) ([]byte, error) {
 // 拡張子に合わせたファイルを生成する。
 // 対応するファイル
 // - json
-func WriteConfigFile(filename string, b []byte) error {
-	home := GetEnvHome()
-	path := filepath.Join(home, filename)
+func WriteConfigFile(appname, filename string, b []byte) error {
+	dir := GetConfigDir()
+	path := filepath.Join(dir, appname, filename)
 	return ioutil.WriteFile(path, b, os.ModePerm)
 }
 
 // 設定ファイルの保存先ディレクトリを作成する
-func MkConfigDir(appnm string) error {
-	dir := filepath.Join(GetConfigDir(), appnm)
+func MkConfigDir(appname string) error {
+	dir := filepath.Join(GetConfigDir(), appname)
 	err := os.MkdirAll(dir, os.ModeDir)
 	return err
 }
