@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	jos "github.com/jiro4989/common-util/os"
+	jos "github.com/jiro4989/lib-go/os"
 )
 
 type testData struct {

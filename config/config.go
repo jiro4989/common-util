@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	jos "github.com/jiro4989/common-util/os"
+	jos "github.com/jiro4989/lib-go/os"
 )
 
 const (
